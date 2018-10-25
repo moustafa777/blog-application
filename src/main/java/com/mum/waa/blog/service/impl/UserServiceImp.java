@@ -3,6 +3,7 @@ package com.mum.waa.blog.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mum.waa.blog.model.User;
 import com.mum.waa.blog.repository.RoleRepository;
@@ -13,6 +14,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
@@ -45,6 +47,6 @@ public class UserServiceImp implements UserService {
         user.setActive(1);
         // Set Role to ROLE_USER
         user.setRoles(Collections.singletonList(roleRepository.findByRole(USER_ROLE)));
-        return userRepository.saveAndFlush(user);
+        return userRepository.save(user);
     }
 }

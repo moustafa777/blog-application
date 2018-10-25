@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mum.waa.blog.model.Post;
 import com.mum.waa.blog.model.User;
@@ -13,6 +14,7 @@ import com.mum.waa.blog.service.PostService;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class PostServiceImp implements PostService {
 
     private final PostRepository postRepository;
@@ -29,7 +31,7 @@ public class PostServiceImp implements PostService {
 
     @Override
     public Post save(Post post) {
-        return postRepository.saveAndFlush(post);
+        return postRepository.save(post);
     }
 
     @Override
